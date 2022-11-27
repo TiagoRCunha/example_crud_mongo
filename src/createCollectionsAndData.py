@@ -1,6 +1,7 @@
 import logging
 from conexion.mongo_queries import MongoQueries
 import json
+from cards import cardsDic
 
 LIST_OF_COLLECTIONS = ["album", "user", "card"]
 logger = logging.getLogger(name="Example_CRUD_MongoDB")
@@ -29,6 +30,9 @@ def createCollections(drop_if_exists:bool=False):
         else:
             mongo.db.create_collection(collection)
             logger.warning(f"{collection} created!")
+    dictCards = cardsDic()
+    for x in range(len(dictCards)):
+        mongo.db.get_collection("card").insert_many(dictCards[x])
     mongo.close()
 
 def insert_many(data:json, collection:str):
