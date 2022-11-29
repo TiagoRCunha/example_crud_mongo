@@ -1,3 +1,6 @@
+from conexion.mongo_queries import MongoQueries
+import pandas as pd
+
 MENU_SPLIT = """
 ========================================
 """
@@ -121,11 +124,11 @@ Quer remover o registro e seus dependentes?
 [2] - Não
 =========================================
 """
+mongo = MongoQueries()
 
-def login(username, password): #Método de login, alterar conexão e pesquisa em banco -- ARRUMAR
-    oracle = OracleQueries()
-    oracle.connect()
-    username_attempt = oracle.sqlToDataFrame(f"select * from labdatabase.\"user\" where username like '{username}' and \"password\" like '{password}'")
+def login(username, password):
+    mongo.connect()
+    username_attempt = pd.DataFrame(list(mongo.db["user"].find({"name":f"{username}", "password":f"{password}"})))
     if not username_attempt.empty:
         return int(username_attempt.iloc[0]["access_type"])
     else:

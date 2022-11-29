@@ -43,9 +43,11 @@ def login():
                 if password == "0":
                         loop = False
                         break
-                access = config.login(username, password) # Realiza pesquisa no banco para verificar o login válido -- ARRUMAR
+                access = config.login(username, password)
                 if access == 0:
-                        print("Login de usuário realizado com sucesso")
+                        print("Login de usuário realizado com sucesso\nMenu de usuário não existente, retornando")
+                        config.clear_console(1)
+                        break
                 elif access == 1:
                         print("Login de administrador realizado com sucesso")
                         config.clear_console(1)
