@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Victor",
+        "password": "1",
+        "access_type": 1
+    },
+    {
+        "name": "Tiago",
+        "password": "2",
+        "access_type": 0
+    },
+    {
+        "name": "Henrique",
+        "password": "3",
+        "access_type": 0
+    }
+]

@@ -46,4 +46,7 @@ if __name__ == "__main__":
     with open("albums.json", "r") as f:
             albums = json.load(f)
     insert_many(albums, "album")
+    with open("users.json", "r") as f:
+            users = json.load(f)
+    insert_many(users, "user")
     logging.warning("End")
