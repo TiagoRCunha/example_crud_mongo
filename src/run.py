@@ -125,11 +125,11 @@ def admin_access_create_records():
         while loop:
                 print(config.MENU_ADMIN_CREATE_RECORDS)
                 print("As tabelas disponiveis para inserção de valores são:\n")
-                table_list = config.search_tables() #Listar as coleções existentes -- ARRUMAR
+                table_list = config.search_tables()
                 aux_list = []
-                for x in range(table_list.shape[0]): #Ajeitar forma de escolher objeto -- ARRUMAR
-                        aux_list.append({ "id": (x + 1), "name": table_list.iloc[x]["table_name"] })
-                        print(f"{x + 1} - " + table_list.iloc[x]["table_name"])
+                for x in range(len(table_list)):
+                        aux_list.append({ "id": (x + 1), "name": table_list[x]})
+                        print(f"{x + 1} - " + table_list[x])
                 print(config.MENU_SPLIT)
                 selection = int(input("Digite o nome da tabela que deseja inserir um valor, insira 0 para sair\n"))
                 config.clear_console(1)

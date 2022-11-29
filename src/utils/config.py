@@ -134,10 +134,9 @@ def login(username, password):
     else:
         return 2
 
-def search_tables(): #Método de pesquisar coleções, alterar tabelas para conexão -- ARRUMAR
-    oracle = OracleQueries()
-    oracle.connect()
-    return(oracle.sqlToDataFrame("select table_name from user_tables"))
+def search_tables():
+    mongo.connect()
+    return mongo.db.list_collection_names()
 
 # Consulta de contagem de registros por tabela
 def query_count(collection_name):
