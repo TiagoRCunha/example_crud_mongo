@@ -1,28 +1,140 @@
-MENU_PRINCIPAL = """Menu Principal
-1 - Relatórios
-2 - Inserir Registros
-3 - Atualizar Registros
-4 - Remover Registros
-5 - Sair
+MENU_SPLIT = """
+========================================
+"""
+MENU_INICIAL = """
+============= Menu Inicial =============
+[1] - Realizar Login
+[0] - Sair
+========================================
 """
 
-MENU_RELATORIOS = """Relatórios
-1 - Relatório de Pedidos por Fornecedores
-2 - Relatório de Pedidos
-3 - Relatório de Produtos
-4 - Relatório de Clientes
-5 - Relatório de Fornecedores
-6 - Relatório de Itens de Pedidos
-0 - Sair
+MENU_LOGIN = """
+============ Realizar Login ============
+Para retornar, digite 0
 """
 
-MENU_ENTIDADES = """Entidades
-1 - PRODUTOS
-2 - CLIENTES
-3 - FORNECEDORES
-4 - PEDIDOS
-5 - ITENS DE PEDIDOS
+MENU_ADMIN = """
+============= Acesso de Adm ============
+[1] - Ver Relatórios
+[2] - Alterar Registros
+[3] - Criar Registros
+[4] - Deletar Registros
+[0] - Sair
+========================================
 """
+
+MENU_ADMIN_REPORTS = """
+========== Ralatórios de Adm ===========
+[1] - Ver Relatórios de Album
+[2] - Ver Relatórios de Cartas
+[3] - Ver Relatórios de Usuários
+[0] - Sair
+========================================
+"""
+
+MENU_ADMIN_CHANGE_RECORDS_ALBUM_OPTIONS= """
+========= Alterações Permitidas ========
+[1] - Alterar Titulo
+[2] - Alterar Descrição
+[0] - Sair
+========================================
+"""
+
+MENU_ADMIN_CHANGE_RECORDS_USER_OPTIONS= """
+========= Alterações Permitidas ========
+[1] - Alterar Username
+[2] - Alterar Senha
+[3] - Alterar Tipo de Acesso
+[0] - Sair
+========================================
+"""
+
+MENU_ADMIN_CHANGE_RECORDS_CARD_OPTIONS= """
+========= Alterações Permitidas ========
+[1] - Alterar Imagem
+[2] - Alterar Nome
+[0] - Sair
+========================================
+"""
+
+MENU_ADMIN_CREATE_RECORDS_CONTINUE= """
+==== Deseja Inserir Mais Registros? ====
+[1] - Sim
+[2] - Não
+========================================
+"""
+
+MENU_ADMIN_DELETE_RECORDS_CONTINUE= """
+==== Deseja Deletar Mais Registros? ====
+[1] - Sim
+[2] - Não
+========================================
+"""
+
+MENU_ADMIN_UPDATE_RECORDS_CONTINUE= """
+==== Deseja Alterar Mais Registros? ====
+[1] - Sim
+[2] - Não
+========================================
+"""
+
+MENU_ADMIN_COMFIRM_RECORDS= """
+====== Você Confirma a Operação? =======
+[1] - Confirmar
+[2] - Cancelar
+========================================
+"""
+
+MENU_ADMIN_CHANGE_RECORDS = """
+=========== Alterar Registros ==========
+"""
+
+MENU_ADMIN_ALBUNS_AVAIBLES = """
+========== Albúns Disponíveis ==========
+"""
+
+MENU_ADMIN_USERS_AVAIBLES = """
+========= Usuários Disponíveis =========
+"""
+
+MENU_ADMIN_CARDS_AVAIBLES = """
+========== Cartas Disponíveis ==========
+"""
+
+MENU_ADMIN_USER_CARD_AVAIBLES = """
+========= User Card Disponíveis =========
+"""
+
+MENU_ADMIN_CREATE_RECORDS = """
+============ Criar Registros ============
+"""
+
+MENU_ADMIN_DELETE_RECORDS = """
+=========== Deletar Registros ===========
+"""
+
+MENU_CONFIRM_CASCATE = """
+=========== Confirmar Cascade ===========
+Existem outros registros que dependem desse
+Quer remover o registro e seus dependentes?
+[1] - Sim
+[2] - Não
+=========================================
+"""
+
+def login(username, password): #Método de login, alterar conexão e pesquisa em banco -- ARRUMAR
+    oracle = OracleQueries()
+    oracle.connect()
+    username_attempt = oracle.sqlToDataFrame(f"select * from labdatabase.\"user\" where username like '{username}' and \"password\" like '{password}'")
+    if not username_attempt.empty:
+        return int(username_attempt.iloc[0]["access_type"])
+    else:
+        return 2
+
+def search_tables(): #Método de pesquisar coleções, alterar tabelas para conexão -- ARRUMAR
+    oracle = OracleQueries()
+    oracle.connect()
+    return(oracle.sqlToDataFrame("select table_name from user_tables"))
 
 # Consulta de contagem de registros por tabela
 def query_count(collection_name):
