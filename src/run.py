@@ -12,7 +12,7 @@ from utils import create_records, remove_records, update_records
 #Ajeitar update_records.py em utils
 
 def run():
-        print(Records().get_init()) # Mostra quantidade de objetos no banco -- ARRUMAR
+        print(Records().get_init())
 
         loop = True
 
@@ -111,11 +111,11 @@ def admin_access_change_records():
                         if aux_list[x]["id"] == selection:
                                 aux_name = aux_list[x]["name"]
                 if aux_name == "album":
-                        update_records.select_album_update() #Atualizar album -- ARRUMAR
+                        update_records.select_album_update()
                 elif aux_name == "user":
-                        update_records.select_user_update() #Atualizar usuario -- ARRUMAR
+                        update_records.select_user_update()
                 elif aux_name == "card":
-                        update_records.select_card_update() #Atualizar carta -- ARRUMAR
+                        update_records.select_card_update()
                 elif selection == 0:
                         loop = False
                         config.clear_console(1)
