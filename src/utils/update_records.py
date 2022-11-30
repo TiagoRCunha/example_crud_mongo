@@ -1,3 +1,4 @@
+from pandas import DataFrame
 from controller.controller_album import AlbumController
 from controller.controller_user import UserController
 from controller.controller_card import CardController
@@ -125,32 +126,43 @@ def update_user(name):
 
 def select_card_update():
     loop = True
+    number = " "
+    offset = 0
+    number_verification = DataFrame()
     while loop:
         print(config.MENU_ADMIN_CARDS_AVAIBLES)
-        cards_list = Records().list_cards()
+        if number == "<":
+            offset = offset - 5
+        elif number == ">":
+            offset = offset + 5
+        elif number == ">>":
+            offset = offset + 40
+        cards_list = Records().list_cards_with_pagination(offset)
         for x in range(cards_list.shape[0]):
-            print(cards_list.iloc[x]["name"])
+            print(str(cards_list.iloc[x]["number"]) + " " + cards_list.iloc[x]["name"])
         print(config.MENU_SPLIT)
-        name = input("Digite o nome da carta que deseja alterar ou 0 para sair\n")
-        name_verification = Records().show_card(name)
-        if name == "0":
+        print("Trocar de página digite '<' para voltar, '>' para avançar, ou '>>' para avançar 40 linhas")
+        number = input("Digite o numero da carta que deseja alterar ou 0 para sair \n")
+        if number not in "<" and number not in ">>":
+            number_verification = Records().show_card_by_number(int(number))
+        if number == "0":
             config.clear_console(1)
             return None
-        while name_verification.empty:
-            name = input("\nOpção inválida, digite novamente ou 0 para sair\n")
-            if name == "0":
+        while number_verification.empty and not number in "<" and not number in ">>":
+            number = input("\nOpção inválida, digite novamente ou 0 para sair \n")
+            if number == "0":
                 config.clear_console(1)
                 return None
-            name_verification = Records().show_card(name)
-        if not name_verification.empty:
+            number_verification = Records().show_card_by_number(int(number))
+        if not number_verification.empty and not number in "<" and not number in ">>":
             config.clear_console(1)
-            if update_card(name) == 0:
+            if update_card(int(number)) == 0:
                 return None
             config.clear_console(1)
             if menu_continue() == 2:
                 return None
 
-def update_card(name):
+def update_card(number):
     show_card = Records().show_card(id)
 
     print("As informações da carta disponíveis para alteração são:\n")
@@ -165,14 +177,14 @@ def update_card(name):
             if new_image == "0":
                 config.clear_console(1)
                 return 0
-            CardController().atualizarCarta(name, new_image, None, 1)
+            CardController().atualizarCarta(number, new_image, None, 1)
             break
         elif selection == 2:
             new_name = input("Insira o novo nome da carta\n")
             if new_name == "0":
                 config.clear_console(1)
                 return 0
-            CardController().atualizarCarta(name, None, new_name, 2)
+            CardController().atualizarCarta(number, None, new_name, 2)
             break
         elif selection == 0:
             config.clear_console(1)

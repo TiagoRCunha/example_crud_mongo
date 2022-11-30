@@ -37,6 +37,7 @@ def create_album():
 
 def create_user():
     loop = True
+    userCtrl = UserController()
     while loop:
         print(config.MENU_ADMIN_USERS_AVAIBLES)
         users_list = Records().list_users()
@@ -58,18 +59,39 @@ def create_user():
         if access_type == "":
             config.clear_console(1)
             return None
-        UserController.inserirUser(username, password, access_type)
+        userCtrl.inserirUser(username, password, access_type)
         if menu_continue() == 2:
             return None
         config.clear_console(1)
+
+def select_album():
+    print(config.MENU_ADMIN_ALBUNS_AVAIBLES)
+    albuns_list = Records().list_albuns()
+    for x in range(albuns_list.shape[0]):
+        print(albuns_list.iloc[x]["title"])
+    print(config.MENU_SPLIT)
+    album = input("Digite o nome do album que deseja selecionar ou 0 para sair\n")
+    loop = True
+    while loop:
+        album_verification = Records().show_album(album)
+        if album == "0":
+            loop = False
+            config.clear_console(1)
+            return 0
+        elif not album_verification.empty:
+            config.clear_console(1)
+            return album
+        while album_verification.empty:
+            album = input("\nOpção inválida, digite novamente ou 0 para sair\n")
+            break
 
 def create_card():
     loop = True
     while loop:
         print(config.MENU_ADMIN_CARDS_AVAIBLES)
         cards_list = Records().list_cards()
-        for x in range(cards_list.shape[0]):
-            print(cards_list.iloc[x]["name"])
+        print("Atualmente existem: " + str(cards_list.shape[0]) + " cartas")
+        print("Ultima carta criada: " + str(cards_list.iloc[-1]["name"]) + " [" + str(cards_list.iloc[-1]["number"]) + "]")
         print(config.MENU_SPLIT)
         print("Criação de cartas\nDurante as opções, para sair digite '0'")
         number = input("Digite o número da carta\n")
@@ -92,7 +114,7 @@ def create_card():
         if border == 0:
             config.clear_console(1)
             return None
-        rarity = input("Digite o nivel de raridade da carta entre 1 e 5\n")
+        rarity = int(input("Digite o nivel de raridade da carta entre 1 e 5\n"))
         while rarity < 1 or rarity > 5:
             rarity = input("Nivel de raridade inexistente, digite um nivel entre 1 e 5, ou digite 0 para sair\n")
             config.clear_console(1)
@@ -110,27 +132,6 @@ def create_card():
         if menu_continue() == 2:
             return None
         config.clear_console(1)
-
-    def select_album():
-        print(config.MENU_ADMIN_ALBUNS_AVAIBLES)
-        albuns_list = Records().list_albuns()
-        for x in range(albuns_list.shape[0]):
-            print(albuns_list.iloc[x]["title"])
-        print(config.MENU_SPLIT)
-        album = input("Digite o nome do album que deseja selecionar ou 0 para sair\n")
-        loop = True
-        while loop:
-            album_verification = Records().show_album(album)
-            if album == "0":
-                loop = False
-                config.clear_console(1)
-                return 0
-            elif not album_verification.empty:
-                config.clear_console(1)
-                return album
-            while album_verification.empty:
-                album = input("\nOpção inválida, digite novamente ou 0 para sair\n")
-                break
 
 def menu_continue():
     config.clear_console(1)

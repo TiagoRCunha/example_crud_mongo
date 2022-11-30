@@ -16,9 +16,9 @@ class CardController:
         self.mongo.connect()
         self.mongo.db["card"].delete_one({"name": f"{card}"})
 
-    def atualizarCarta(self, name: str, new_image: Optional[str], new_name: Optional[str], change: int):
+    def atualizarCarta(self, number: str, new_image: Optional[str], new_name: Optional[str], change: int):
         self.mongo.connect()
         if change == 1:
-            self.mongo.db["card"].update_one({"name": f"{name}"}, {"$set": {"image": new_image}})
+            self.mongo.db["card"].update_one({"number": number }, {"$set": {"image": new_image}})
         if change == 2:
-            self.mongo.db["card"].update_one({"name": f"{name}"}, {"$set": {"name": new_name}})
+            self.mongo.db["card"].update_one({"number": number }, {"$set": {"name": new_name}})

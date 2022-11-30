@@ -51,9 +51,18 @@ class Records:
         self.mongo.connect()
         return DataFrame(list(self.mongo.db['card'].find()))
 
+    def list_cards_with_pagination(self, offset) -> DataFrame:
+        self.mongo.connect()
+        return DataFrame(list(self.mongo.db['card'].find().skip(offset).limit(5)))
+
     def show_card(self, card) -> DataFrame:
         self.mongo.connect()
         return DataFrame(list(self.mongo.db['card'].find({"name":f"{card}"})))
+
+    def show_card_by_number(self, card) -> DataFrame:
+        self.mongo.connect()
+        return DataFrame(list(self.mongo.db['card'].find({"number": card})))
+
 
     def get_init(self) -> str:
         return f"""
