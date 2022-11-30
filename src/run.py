@@ -98,11 +98,11 @@ def admin_access_change_records():
         while loop:
                 print(config.MENU_ADMIN_CHANGE_RECORDS)
                 print("As tabelas disponiveis para modificação são:\n")
-                table_list = config.search_tables() #Listar as coleções existentes -- ARRUMAR
+                table_list = config.search_tables()
                 aux_list = []
-                for x in range(table_list.shape[0]): #Ajeitar forma de escolher objeto -- ARRUMAR
-                        aux_list.append({ "id": (x + 1), "name": table_list.iloc[x]["table_name"] })
-                        print(f"{x + 1} - " + table_list.iloc[x]["table_name"])
+                for x in range(len(table_list)):
+                        aux_list.append({ "id": (x + 1), "name": table_list[x]})
+                        print(f"{x + 1} - " + table_list[x])
                 print(config.MENU_SPLIT)
                 selection = int(input("Digite o nome da tabela que deseja modificar, insira 0 para sair\n"))
                 config.clear_console(1)
@@ -138,11 +138,11 @@ def admin_access_create_records():
                         if aux_list[x]["id"] == selection:
                                 aux_name = aux_list[x]["name"]
                 if aux_name == "album":
-                        create_records.create_album() #Criar album -- ARRUMAR
+                        create_records.create_album()
                 elif aux_name == "user":
-                        create_records.create_user() #Criar user -- ARRUMAR
+                        create_records.create_user()
                 elif aux_name == "card":
-                        create_records.create_card() #Criar carta -- ARRUMAR
+                        create_records.create_card()
                 if selection == 0:
                         loop = False
                         config.clear_console(1)
@@ -152,10 +152,11 @@ def admin_access_delete_records():
         while loop:
                 print(config.MENU_ADMIN_DELETE_RECORDS)
                 print("As tabelas disponiveis para remoção de valores são:\n")
-                table_list = config.search_tables() #Listar as coleções existentes -- ARRUMAR
+                table_list = config.search_tables()
                 aux_list = []
-                for x in range(table_list.shape[0]): #Ajeitar forma de escolher objeto -- ARRUMAR
-                        print(f"{x + 1} - " + table_list.iloc[x]["table_name"])
+                for x in range(len(table_list)):
+                        aux_list.append({ "id": (x + 1), "name": table_list[x]})
+                        print(f"{x + 1} - " + table_list[x])
                 print(config.MENU_SPLIT)
                 selection = int(input("Digite o nome da tabela que deseja remover um valor, insira 0 para sair\n"))
                 config.clear_console(1)
@@ -164,11 +165,11 @@ def admin_access_delete_records():
                         if aux_list[x]["id"] == selection:
                                 aux_name = aux_list[x]["name"]
                 if aux_name == "album":
-                        create_records.create_album() #Criar album -- ARRUMAR
+                        remove_records.remove_album()
                 elif aux_name == "user":
-                        create_records.create_user() #Criar user -- ARRUMAR
+                        remove_records.remove_user()
                 elif aux_name == "card":
-                        create_records.create_card() #Criar carta -- ARRUMAR
+                        remove_records.remove_card() 
                 if selection == 0:
                         loop = False
                         config.clear_console(1)
