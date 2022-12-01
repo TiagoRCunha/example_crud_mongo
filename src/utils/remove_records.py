@@ -22,7 +22,7 @@ def remove_album():
                 return None
             album_verification = Records().show_album(album)
         if menu_confirm() == 1:
-                AlbumController.removerAlbum(album)
+                AlbumController().removerAlbum(album)
                 config.clear_console(1)
                 if menu_continue() == 2:
                     return None
@@ -44,7 +44,7 @@ def remove_user():
                 return None
             user_verification = Records().show_user(name)
         if menu_confirm() == 1:
-                UserController.removerUser(name)
+                UserController().removerUser(name)
                 config.clear_console(1)
                 if menu_continue() == 2:
                     return None

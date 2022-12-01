@@ -1,3 +1,22 @@
+# Sobre este projeto
+
+Este projeto é um __fork__ [deste repositório](https://github.com/howardroatti/example_crud_mongo), para fins de obtenção de nota na disciplina de banco de dados ministrada pelo professor Howard Roatti.
+
+Os integrantes são:
+- [Henrique Klayton](https://github.com/henrique-klayton)
+- [Tiago R Cunha](https://github.com/TiagoRCunha)
+- [Victor Binda S](https://github.com/Victorbnd)
+
+[Vídeo de apresentação](https://youtu.be/TvQ2rhCQZck)
+
+
+# Album digital
+
+Esse sistema é sobre completar um album digital, adicionando cartas únicas com o intuito de trabalhar com os conteúdos aprendidos em aula. O usuário pode comprar figurinhas, para completar o album, e cada figurinha tem propriedades diferentes.
+
+--- 
+
+
 # Exemplo de Sistema em Python fazendo CRUD no MongoDB
 
 Esse sistema de exemplo é composto por um conjunto de coleções(collections) que representam pedidos de vendas, contendo coleções como: clientes, fornecedores, produtos, pedidos e itens de pedido.
@@ -126,6 +145,17 @@ Para executar o sistema basta executar o script Python a seguir:
 ### Bibliotecas Utilizadas
 - [requirements.txt](src/requirements.txt): `pip install -r requirements.txt`
 
-## Contato
+## Contato do grupo
+Tiago R. Cunha
+- [LinkedIn](https://linkedin.com/in/tiago-rodrigues-cunha)
+- [E-Mail](mailto:tiago.r.c.sn@gmail.com)
+Henrique
+- [LinkedIn](https://linkedin.com/in/henrique-klayton)
+- [E-Mail](mailto:henrique70031@gmail.com)
+Victor
+- [LinkedIn](https://linkedin.com/in/victorbnd)
+- [E-Mail](mailto:victorbinda2017@gmail.com)
+
+## Contato do professor
 - [LinkedIn](https://linkedin.com/in/howardroatti)
 - [E-Mail](mailto:howardcruzroatti@gmail.com)

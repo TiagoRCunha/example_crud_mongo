@@ -54,7 +54,7 @@ def update_album(title):
             if new_description == "0":
                 config.clear_console(1)
                 return 0
-            AlbumController().atualizarAlbum(id, None, new_description, 2)
+            AlbumController().atualizarAlbum(title, None, new_description, 2)
             break
         elif selection == 0:
             config.clear_console(1)
