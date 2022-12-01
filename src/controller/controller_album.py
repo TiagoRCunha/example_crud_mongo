@@ -22,3 +22,7 @@ class AlbumController:
             self.mongo.db["album"].update_one({"title": f"{title}"}, {"$set": {"title": new_title}})
         if change == 2:
             self.mongo.db["album"].update_one({"title": f"{title}"}, {"$set": {"description": new_description}})
+    
+    def atualizarAlbumContagem(self, title: str, factor: int):
+        self.mongo.connect()
+        self.mongo.db["album"].update_one({"title": f"{title}"}, {"$inc": { "card_count": factor }})

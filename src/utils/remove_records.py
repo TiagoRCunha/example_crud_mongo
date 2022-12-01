@@ -66,7 +66,7 @@ def remove_card():
                 return None
             card_verification = Records().show_card(card)
         if menu_confirm() == 1:
-                CardController.removerCarta(card)
+                CardController().removerCarta(card)
                 config.clear_console(1)
                 if menu_continue() == 2:
                     return None

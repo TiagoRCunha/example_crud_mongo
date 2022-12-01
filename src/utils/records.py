@@ -9,7 +9,7 @@ class Records:
 
     def select_admin_album_view(self) -> DataFrame:
         self.mongo.connect()
-        return self.oracle.sqlToDataFrame("select * from admin_album_view") #alterar
+        return DataFrame(self.mongo.db["album"].find())
     
     def select_admin_card_view(self) -> DataFrame:
         self.mongo.connect()
