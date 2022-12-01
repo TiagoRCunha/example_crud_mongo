@@ -81,13 +81,26 @@ def admin_access_reports():
                 selection = int(input("Selecione a opção\n"))
                 config.clear_console(1)
                 if selection == 1:
-                        print(Records().select_admin_album_view()) #Ver report de album -- ARRUMAR
+                        print(Records().select_admin_album_view())
                         break
                 elif selection == 2:
-                        print(Records().select_admin_card_view()) #Ver report de cartas -- ARRUMAR
+                        loop2 = True
+                        offset = 0
+                        while loop2:
+                                print(Records().select_admin_card_view(offset))
+                                print("Trocar de página digite '<' para voltar, '>' para avançar, ou '>>' para avançar 40 linhas")
+                                entrada = input("Digite 0 para sair ou use a paginação: \n")
+                                if entrada == "0":
+                                        loop2 = False
+                                elif entrada in "<" and offset > 0:
+                                        offset = offset - 10
+                                elif entrada == ">":
+                                        offset = offset + 10
+                                elif entrada == ">>":
+                                        offset = offset + 40
                         break
                 elif selection == 3:
-                        print(Records().select_admin_users_view()) #Ver report de usuarios -- ARRUMAR
+                        print(Records().select_admin_users_view())
                         break
                 elif selection == 0:
                         loop = False

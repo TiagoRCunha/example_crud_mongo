@@ -11,13 +11,13 @@ class Records:
         self.mongo.connect()
         return DataFrame(self.mongo.db["album"].find())
     
-    def select_admin_card_view(self) -> DataFrame:
+    def select_admin_card_view(self, offset: int = 0) -> DataFrame:
         self.mongo.connect()
-        return self.oracle.sqlToDataFrame("select * from admin_card_view") #alterar
+        return DataFrame(self.mongo.db["card"].find().skip(offset).limit(10))
 
     def select_admin_users_view(self) -> DataFrame:
         self.mongo.connect()
-        return self.oracle.sqlToDataFrame("select * from admin_users_view") #alterar
+        return DataFrame(self.mongo.db["user"].find())
     
     def total_albuns(self) -> int:
         self.mongo.connect()
