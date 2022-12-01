@@ -2,15 +2,6 @@ import utils.config as config
 from utils.records import Records
 from utils import create_records, remove_records, update_records
 
-#TODO
-#Verificar uso de ILOC em todo o projeto
-#Alterar todos os pontos comentados nesse arquivo
-#Ajeitar records.py em utils
-#Ajeitar métodos de login e pesquisar tabela(coleções) em config.py em utils
-#Ajeitar create_records.py em utils, verificar necessidade de controllers
-#Ajeitar remove_records.py em utils
-#Ajeitar update_records.py em utils
-
 def run():
         print(Records().get_init())
 

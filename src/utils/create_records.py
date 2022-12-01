@@ -17,14 +17,8 @@ def create_album():
         if title == "0":
             config.clear_console(1)
             return None
-        card_count = input("Quantas cartas o album possuirá?\n")
-        if card_count == "0":
-            config.clear_console(1)
-            return None
-        page_number = input("Quantas páginas o album possuirá?\n")
-        if page_number == "0":
-            config.clear_console(1)
-            return None
+        card_count = 0
+        page_number = 0
         description = input("Digite a descrição do album\n")
         if description == "0":
             config.clear_console(1)
