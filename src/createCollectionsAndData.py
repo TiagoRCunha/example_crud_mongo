@@ -1,6 +1,9 @@
 import logging
+
+from pandas import DataFrame
 from conexion.mongo_queries import MongoQueries
 import json
+import math
 from cards import cardsDic
 
 LIST_OF_COLLECTIONS = ["album", "user", "card"]
@@ -30,8 +33,16 @@ def createCollections(drop_if_exists:bool=False):
         else:
             mongo.db.create_collection(collection)
             logger.warning(f"{collection} created!")
+    with open("albums.json", "r") as f:
+            albums = json.load(f)
+    mongo.db["album"].insert_many(albums)
     dictCards = cardsDic()
     for x in range(len(dictCards)):
+        mongo.db["album"].update_one({ "title": str(dictCards[x][0]['album']) }, {
+                 "$set": {
+                    "card_count": len(dictCards[x]),
+                    "page_count": math.floor(len(dictCards[x])/10)
+                 }})
         mongo.db.get_collection("card").insert_many(dictCards[x])
     mongo.close()
 
@@ -43,7 +54,7 @@ def insert_many(data:json, collection:str):
 if __name__ == "__main__":
     logging.warning("Starting")
     createCollections(drop_if_exists=True)
-    with open("albums.json", "r") as f:
-            albums = json.load(f)
-    insert_many(albums, "album")
+    with open("users.json", "r") as f:
+            users = json.load(f)
+    insert_many(users, "user")
     logging.warning("End")
